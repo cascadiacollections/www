@@ -1,2 +1,3 @@
-# www
+# Cascadia Collections
+
 www.cascadiacollections.com

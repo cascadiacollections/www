@@ -1,0 +1,17 @@
+{
+  "name": "@cascadiacollections/www",
+  "version": "1.0.0",
+  "description": "www.cascadiacollections.com",
+  "keywords": "Cascadia",
+  "license": "MIT",
+  "author": "Kevin T. Coughlin <kevin@cascadiacollections.com>",
+  "scripts": {
+    "build": "parcel build index.html",
+    "dev": "parcel index.html --open",
+    "start": "npm run build && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
