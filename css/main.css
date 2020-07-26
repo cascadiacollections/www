@@ -261,3 +261,20 @@ textarea {
   }
 }
 
+/*
+ * App styles
+ */
+ html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+ main {
+  margin: 0 auto;
+}
