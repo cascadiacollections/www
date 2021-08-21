@@ -9,7 +9,7 @@
   "license": "MIT",
   "author": "Kevin T. Coughlin <kevin@cascadiacollections.com>",
   "scripts": {
-    "build": "parcel build index.html",
+    "build": "parcel build index.html privacy.html",
     "start": "parcel index.html --open"
   },
   "devDependencies": {
