@@ -1,12 +1,14 @@
 {
   "short_name": "cascadiaco",
   "name": "Cascadia Collections",
+  "description": "Software company based in the Pacific Northwest.",
   "icons": [{
     "src": "icon.png",
     "type": "image/png",
     "sizes": "192x192"
   }],
   "start_url": "/?utm_source=homescreen",
+  "display": "standalone",
   "background_color": "#fafafa",
   "theme_color": "#fafafa"
 }
