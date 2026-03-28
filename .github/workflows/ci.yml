@@ -34,13 +34,13 @@ jobs:
       uses: actions/setup-node@v6
       with:
         node-version: ${{ env.NODE_VERSION }}
-        cache: 'yarn'
+        cache: 'npm'
 
     - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      run: npm ci
 
     - name: Build
-      run: yarn build
+      run: npm run build
 
     - name: Dependency review
       uses: actions/dependency-review-action@v4
