@@ -3,8 +3,12 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Page Not Found</title>
+  <title>Page Not Found - Cascadia Collections</title>
+  <meta name="description" content="The requested page could not be found.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1a1a2e" media="(prefers-color-scheme: dark)">
   <style>
     * {
       line-height: 1.6;
@@ -14,17 +18,18 @@
 
     html {
       color: #555;
-      display: table;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       height: 100%;
       text-align: center;
-      width: 100%;
     }
 
     body {
-      display: table-cell;
-      vertical-align: middle;
-      margin: 2em auto;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100%;
+      padding: 2rem;
     }
 
     h1 {
@@ -40,6 +45,11 @@
 
     a {
       color: #0066cc;
+    }
+
+    a:focus-visible {
+      outline: 3px solid currentColor;
+      outline-offset: 3px;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -60,7 +70,7 @@
 </head>
 
 <body>
-  <h1>Page Not Found</h1>
+  <h1>Page not found</h1>
   <p>Sorry, but the page you were trying to view does not exist.</p>
   <p><a href="/">Return home</a></p>
 </body>

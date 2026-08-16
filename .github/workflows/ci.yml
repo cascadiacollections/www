@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 env:
-  NODE_VERSION: '20'
+  NODE_VERSION: '22'
 
 # Cancel in-progress runs when new commits are pushed
 concurrency:
@@ -28,10 +28,14 @@ jobs:
     timeout-minutes: 5
     steps:
     - name: Checkout code
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+    - name: Dependency review
+      uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+      if: github.event_name == 'pull_request'
 
     - name: Setup Node.js
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
       with:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
@@ -42,6 +46,5 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: Dependency review
-      uses: actions/dependency-review-action@v5
-      if: github.event_name == 'pull_request'
+    - name: Audit dependencies
+      run: npm audit
