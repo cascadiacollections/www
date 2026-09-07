@@ -26,6 +26,6 @@
     "@parcel/transformer-xml": "^2.16.4",
     "cssnano": "^9.0.1",
     "parcel": "^2.16.4",
-    "postcss": "^8.5.26"
+    "postcss": "^8.5.28"
   }
 }
