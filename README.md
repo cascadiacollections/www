@@ -6,7 +6,7 @@ built with [Parcel](https://parceljs.org/) and deployed with
 
 ## Development
 
-Use Node.js 24:
+Use Node.js 26:
 
 ```sh
 nvm use

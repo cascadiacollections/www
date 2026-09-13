@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 env:
-  NODE_VERSION: '24'
+  NODE_VERSION: '26'
 
 # Cancel in-progress runs when new commits are pushed
 concurrency:
