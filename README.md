@@ -6,7 +6,7 @@ built with [Parcel](https://parceljs.org/) and deployed with
 
 ## Development
 
-Use Node.js 22:
+Use Node.js 26:
 
 ```sh
 nvm use
@@ -26,7 +26,8 @@ Parcel bundles.
 
 ## Deployment
 
-Pushes to `main` build and deploy through `.github/workflows/deploy.yml`.
+Pull requests run the build, dependency audit, and GitHub dependency review in
+CI. Pushes to `main` deploy to Cloudflare Pages through
+`.github/workflows/deploy.yml`.
 The repository must define the `CLOUDFLARE_API_TOKEN` and
-`CLOUDFLARE_ACCOUNT_ID` Actions secrets. Pull requests run the same build,
-dependency audit, and GitHub dependency review in CI.
+`CLOUDFLARE_ACCOUNT_ID` Actions secrets.
