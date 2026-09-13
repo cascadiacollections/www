@@ -2,7 +2,7 @@ import { copyFile, mkdir } from "node:fs/promises";
 
 const files = [
   "404.html",
-  "_headers",
+  "CNAME",
   "browserconfig.xml",
   "favicon.ico",
   "humans.txt",

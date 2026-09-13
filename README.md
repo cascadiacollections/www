@@ -2,7 +2,7 @@
 
 Static website for [www.cascadiacollections.com](https://www.cascadiacollections.com/),
 built with [Parcel](https://parceljs.org/) and deployed with
-[Cloudflare Pages](https://pages.cloudflare.com/).
+[GitHub Pages](https://pages.github.com/).
 
 ## Development
 
@@ -20,14 +20,13 @@ Run the production build and checks with:
 npm run check
 ```
 
-The output is written to `dist/`. The build copies Cloudflare Pages headers,
+The output is written to `dist/`. The build copies the custom domain `CNAME`,
 the custom 404 page, crawler metadata, and legacy icon metadata alongside the
 Parcel bundles.
 
 ## Deployment
 
 Pull requests run the build, dependency audit, and GitHub dependency review in
-CI. Pushes to `main` deploy to Cloudflare Pages through
-`.github/workflows/deploy.yml`.
-The repository must define the `CLOUDFLARE_API_TOKEN` and
-`CLOUDFLARE_ACCOUNT_ID` Actions secrets.
+CI. Pushes to `main` deploy to GitHub Pages through
+`.github/workflows/deploy.yml`, which uploads `dist/` as a Pages artifact.
+No secrets are required; Pages must be configured to build from GitHub Actions.
