@@ -1,7 +1,7 @@
 {
   "short_name": "cascadiaco",
   "name": "Cascadia Collections",
-  "description": "Software company based in the Pacific Northwest.",
+  "description": "Open source software and curated goods from the Pacific Northwest.",
   "id": "/",
   "icons": [
     {
@@ -18,6 +18,6 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#fafafa",
-  "theme_color": "#fafafa"
+  "background_color": "#f4f1e8",
+  "theme_color": "#071a17"
 }
