@@ -10,7 +10,7 @@
   "author": "Kevin T. Coughlin <kevin@cascadiacollections.com>",
   "private": true,
   "engines": {
-    "node": "22.x",
+    "node": "24.x",
     "npm": ">=10"
   },
   "scripts": {
