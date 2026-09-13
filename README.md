@@ -26,9 +26,9 @@ Parcel bundles.
 
 ## Deployment
 
-Pull requests from branches in this repository build and deploy to a
-Cloudflare Pages preview through `.github/workflows/deploy.yml`. Pushes to
-`main` deploy to production.
+Pull requests build and deploy to a Netlify preview through the repository's
+GitHub integration. Pushes to `main` deploy to Cloudflare Pages through
+`.github/workflows/deploy.yml`.
 The repository must define the `CLOUDFLARE_API_TOKEN` and
 `CLOUDFLARE_ACCOUNT_ID` Actions secrets. Pull requests run the same build,
 dependency audit, and GitHub dependency review in CI.

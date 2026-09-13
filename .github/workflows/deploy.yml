@@ -8,14 +8,6 @@ on:
       - 'LICENSE.txt'
       - '.gitignore'
       - '.editorconfig'
-  pull_request:
-    branches: [ "main" ]
-    types: [ opened, synchronize, reopened ]
-    paths-ignore:
-      - '**.md'
-      - 'LICENSE.txt'
-      - '.gitignore'
-      - '.editorconfig'
   workflow_dispatch:
 
 permissions:
@@ -33,7 +25,6 @@ concurrency:
 jobs:
   deploy:
     name: Build & Deploy
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -53,10 +44,8 @@ jobs:
       run: npm run build
 
     - name: Deploy to Cloudflare Pages
-      id: deploy
       uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        command: pages deploy dist --project-name=cascadiacollections-www --branch=${{ github.head_ref || github.ref_name }}
-        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        command: pages deploy dist --project-name=cascadiacollections-www
