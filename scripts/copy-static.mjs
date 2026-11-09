@@ -6,6 +6,7 @@ const files = [
   "browserconfig.xml",
   "favicon.ico",
   "humans.txt",
+  "og-image.png",
   "robots.txt",
   "sitemap.xml",
   "tile-wide.png",

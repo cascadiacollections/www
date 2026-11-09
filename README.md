@@ -30,3 +30,12 @@ Pull requests run the build, dependency audit, and GitHub dependency review in
 CI. Pushes to `main` deploy to GitHub Pages through
 `.github/workflows/deploy.yml`, which uploads `dist/` as a Pages artifact.
 No secrets are required; Pages must be configured to build from GitHub Actions.
+
+## Site switches
+
+`site.config.js` holds the two settings that change without a redesign:
+
+- `steamUrl`: empty while Salt Line has no Steam store page, so "Coming to
+  Steam" renders as plain text. Set it to the store URL to turn it into a link.
+- `showSponsors`: set to `false` to hide every "Support the work" (GitHub
+  Sponsors) link.
