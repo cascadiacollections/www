@@ -1,6 +1,6 @@
 # Cascadia Collections
 
-Static website for [www.cascadiacollections.com](https://www.cascadiacollections.com/),
+Static website for [cascadiacollections.com](https://cascadiacollections.com/),
 built with [Parcel](https://parceljs.org/) and deployed with
 [GitHub Pages](https://pages.github.com/).
 
