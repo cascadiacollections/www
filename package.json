@@ -15,7 +15,8 @@
   },
   "scripts": {
     "build": "parcel build index.html privacy.html && node scripts/copy-static.mjs",
-    "check": "npm run build",
+    "check": "npm test && npm run build",
+    "test": "node --test",
     "start": "parcel index.html --open"
   },
   "devDependencies": {

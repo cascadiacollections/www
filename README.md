@@ -39,3 +39,12 @@ No secrets are required; Pages must be configured to build from GitHub Actions.
   Steam" renders as plain text. Set it to the store URL to turn it into a link.
 - `showSponsors`: set to `false` to hide every "Support the work" (GitHub
   Sponsors) link.
+
+## Seasonal promo
+
+`promo.mjs` holds the Black Friday / Cyber Monday 2026 window: 2026-11-27 00:00
+through 2026-12-01 23:59 America/Los_Angeles. Outside that window the banner
+and free-picks section stay hidden, including when JavaScript is off.
+`?promo=bf2026` previews them on any day. Dismiss is remembered in
+localStorage (`cc-promo-bf2026`); the preview query shows the banner again on
+the next load. No cookies, analytics, or third-party scripts.

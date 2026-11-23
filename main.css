@@ -164,6 +164,91 @@ main > section,
   text-decoration: underline;
 }
 
+/* Seasonal promo. Hidden until promo.mjs reveals it, so it takes no space otherwise. */
+
+.promo {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.promo-inner {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.5rem;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0.9rem var(--gutter);
+}
+
+.promo-copy {
+  flex: 1 1 18rem;
+  max-width: 44rem;
+}
+
+.promo-kicker {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+}
+
+.promo-copy p {
+  margin: 0;
+}
+
+.promo-actions {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.promo-actions a,
+.promo-dismiss {
+  align-items: center;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid currentColor;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1.2;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.9rem;
+  text-decoration: none;
+}
+
+.promo-actions a:hover,
+.promo-dismiss:hover {
+  background: var(--accent-text);
+  color: var(--accent);
+}
+
+.promo a:focus-visible,
+.promo button:focus-visible {
+  outline: 3px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .promo {
+    animation: promo-in 180ms ease-out;
+  }
+}
+
+@keyframes promo-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* Shared */
 
 .eyebrow {
@@ -256,6 +341,11 @@ h2 {
 
 .hero h1 {
   font-size: clamp(3.25rem, 14vw, 7rem);
+}
+
+/* Focus lands here after the promo is dismissed. It is not in the tab order. */
+#hero-title:focus {
+  outline: none;
 }
 
 .hero-tagline {
