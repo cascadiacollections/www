@@ -29,6 +29,7 @@
   <meta name="theme-color" content="#0c1a17" media="(prefers-color-scheme: dark)">
   <link rel="stylesheet" href="main.css">
   <script type="module" src="site.config.js"></script>
+  <script type="module" src="promo.mjs"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -72,6 +73,20 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- Black Friday 2026. promo.mjs reveals this during the window, or with ?promo=bf2026. Hidden with no JS. -->
+  <aside class="promo" id="bf-promo" data-promo-banner hidden role="region" aria-labelledby="bf-promo-title">
+    <div class="promo-inner">
+      <div class="promo-copy">
+        <p class="promo-kicker" id="bf-promo-title">Black Friday through Cyber Monday</p>
+        <p>Skip the checkout line. Shoutkit for iPhone and Bauhaus are free, with no ads and no tracking.</p>
+      </div>
+      <div class="promo-actions">
+        <a href="#free-picks">Free picks</a>
+        <button class="promo-dismiss" type="button" data-promo-dismiss aria-label="Dismiss Black Friday notice">Dismiss</button>
+      </div>
+    </div>
+  </aside>
+
   <header class="site-header">
     <a class="brand" href="/" aria-label="Cascadia Collections home">
       <span class="brand-mark" aria-hidden="true">CC</span>
@@ -81,6 +96,7 @@
       <ul>
         <li><a href="#salt-line">Salt Line</a></li>
         <li><a href="#shoutkit">Shoutkit</a></li>
+        <li data-promo-picks hidden><a href="#free-picks">Free picks</a></li>
         <li><a href="#projects">More</a></li>
       </ul>
     </nav>
@@ -90,7 +106,7 @@
     <section class="hero" id="salt-line" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">Our game, in development</p>
-        <h1 id="hero-title">Salt Line</h1>
+        <h1 id="hero-title" tabindex="-1">Salt Line</h1>
         <p class="hero-tagline">An artillery roguelike where every shot leaves its mark.</p>
         <p class="hero-intro">Aim through the wind, bring the structures down, and push on along an endless procedural horizon. The ground you break stays broken, every shell you fire comes out of the run, and every four screens you draft a modifier.</p>
         <div class="hero-actions">
@@ -126,6 +142,51 @@
       <ul class="store-links">
         <li><a class="button button-secondary" href="https://cascadiacollections.github.io/shoutkit/">Shoutkit for iPhone <span aria-hidden="true">↗</span></a></li>
         <li><a class="button button-secondary" href="https://cascadiacollections.github.io/shoutkit-android/">Shoutkit for Android <span aria-hidden="true">↗</span></a></li>
+      </ul>
+    </section>
+
+    <section class="free-picks section" id="free-picks" data-promo-picks hidden aria-labelledby="free-picks-title">
+      <div class="section-heading">
+        <p class="eyebrow">Through Cyber Monday</p>
+        <h2 id="free-picks-title">Free picks</h2>
+        <p class="lede">Already free, this weekend and after. Nothing to check out.</p>
+      </div>
+      <ul class="project-list">
+        <li>
+          <a href="https://cascadiacollections.github.io/shoutkit/">
+            <strong>Shoutkit for iPhone</strong>
+            <span class="project-summary">Internet radio. Free, open source and private, with no ads and no tracking.</span>
+            <span class="project-tag">iOS</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://cascadiacollections.github.io/shoutkit-android/">
+            <strong>Shoutkit for Android</strong>
+            <span class="project-summary">Internet radio. The free build has no ads and no analytics.</span>
+            <span class="project-tag">Android</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://cascadiacollections.github.io/bauhaus-android/">
+            <strong>Bauhaus for Android</strong>
+            <span class="project-summary">Daily art wallpaper for Android 15 and newer. Free and open source, with no ads and no tracking.</span>
+            <span class="project-tag">Android</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://podrapp.com/">
+            <strong>Podr</strong>
+            <span class="project-summary">An open-source podcast player for the web: search, keep favourites and listen in the browser.</span>
+            <span class="project-tag">Web app</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://cascadiacollections.github.io/saltline/">
+            <strong>Salt Line demo</strong>
+            <span class="project-summary">Free shareware demo: full runs, capped at 12 screens, with no telemetry.</span>
+            <span class="project-tag">Game · demo</span>
+          </a>
+        </li>
       </ul>
     </section>
 
