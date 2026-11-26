@@ -20,15 +20,11 @@ describe("privacy policy", () => {
   });
 
   it("points at the ShoutKit privacy pages and keeps a plain mailto", () => {
-    assert.match(privacy, /https:\/\/cascadiacollections\.github\.io\/shoutkit\/#privacy/);
-    assert.match(
-      privacy,
-      /href="https:\/\/cascadiacollections\.github\.io\/shoutkit-android\/privacy\/"/,
+    assert.ok(privacy.includes("https://cascadiacollections.github.io/shoutkit/#privacy"));
+    assert.ok(
+      privacy.includes('href="https://cascadiacollections.github.io/shoutkit-android/privacy/"'),
     );
-    assert.match(
-      privacy,
-      /https:\/\/cascadiacollections\.github\.io\/shoutkit-android\/privacy\/play\//,
-    );
+    assert.ok(privacy.includes("https://cascadiacollections.github.io/shoutkit-android/privacy/play/"));
     assert.match(
       privacy,
       /<!--email_off--><a href="mailto:kevin@cascadiacollections.com">kevin@cascadiacollections.com<\/a><!--\/email_off-->/,
