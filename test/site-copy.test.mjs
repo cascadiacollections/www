@@ -6,6 +6,26 @@ function read(name) {
   return readFileSync(new URL(`../${name}`, import.meta.url), "utf8");
 }
 
+function hasHttpsLink(html, { hostname, pathname, hash = "" }) {
+  for (const match of html.matchAll(/href="([^"]+)"/g)) {
+    let url;
+    try {
+      url = new URL(match[1]);
+    } catch {
+      continue;
+    }
+    if (
+      url.protocol === "https:" &&
+      url.hostname === hostname &&
+      url.pathname === pathname &&
+      url.hash === hash
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
 const privacy = read("privacy.html");
 const home = read("index.html");
 
@@ -20,11 +40,13 @@ describe("privacy policy", () => {
   });
 
   it("points at the ShoutKit privacy pages and keeps a plain mailto", () => {
-    assert.ok(privacy.includes("https://cascadiacollections.github.io/shoutkit/#privacy"));
-    assert.ok(
-      privacy.includes('href="https://cascadiacollections.github.io/shoutkit-android/privacy/"'),
+    const host = "cascadiacollections.github.io";
+    assert.equal(hasHttpsLink(privacy, { hostname: host, pathname: "/shoutkit/", hash: "#privacy" }), true);
+    assert.equal(hasHttpsLink(privacy, { hostname: host, pathname: "/shoutkit-android/privacy/" }), true);
+    assert.equal(
+      hasHttpsLink(privacy, { hostname: host, pathname: "/shoutkit-android/privacy/play/" }),
+      true,
     );
-    assert.ok(privacy.includes("https://cascadiacollections.github.io/shoutkit-android/privacy/play/"));
     assert.match(
       privacy,
       /<!--email_off--><a href="mailto:kevin@cascadiacollections.com">kevin@cascadiacollections.com<\/a><!--\/email_off-->/,
