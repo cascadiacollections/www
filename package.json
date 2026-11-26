@@ -19,6 +19,9 @@
     "test": "node --test",
     "start": "parcel index.html --open"
   },
+  "htmlnano": {
+    "removeComments": false
+  },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.16.4",
     "@parcel/packager-xml": "^2.16.4",
