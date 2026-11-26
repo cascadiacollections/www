@@ -35,7 +35,17 @@ describe("privacy policy", () => {
     assert.match(privacy, /studio website at cascadiacollections\.com/);
     assert.match(privacy, /cc-promo-bf2026/);
     assert.match(privacy, /GitHub Pages/);
-    assert.match(privacy, /Cloudflare/);
+    assert.match(privacy, /Cloudflare Web Analytics/);
+    assert.match(privacy, /does not fingerprint individual visitors/);
+    assert.equal(
+      hasHttpsLink(privacy, {
+        hostname: "developers.cloudflare.com",
+        pathname: "/speed/observatory/rum-beacon/",
+        hash: "#privacy-information",
+      }),
+      true,
+    );
+    assert.doesNotMatch(privacy, /do not run analytics|do not add tracking/i);
     assert.doesNotMatch(privacy, /Termly|February 15, 2026|prize/i);
   });
 
@@ -61,13 +71,12 @@ describe("privacy policy", () => {
 });
 
 describe("ShoutKit spelling", () => {
-  it("uses ShoutKit outside the Black Friday promo block", () => {
+  it("uses ShoutKit, including the Black Friday banner", () => {
     assert.match(home, /<title>Cascadia Collections: Salt Line, ShoutKit and more<\/title>/);
-    const withoutPromo = home.replace(/<aside class="promo"[\s\S]*?<\/aside>/, "");
-    assert.doesNotMatch(withoutPromo, /Shoutkit/);
+    assert.doesNotMatch(home, /Shoutkit/);
     assert.match(
       home,
-      /Skip the checkout line\. Shoutkit for iPhone and Bauhaus are free, with no ads and no tracking\./,
+      /Skip the checkout line\. ShoutKit for iPhone and Bauhaus are free, with no ads and no tracking\./,
     );
     assert.doesNotMatch(read("main.css"), /Shoutkit/);
     assert.match(read("site.webmanifest"), /ShoutKit/);
