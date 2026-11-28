@@ -6,6 +6,15 @@ function read(name) {
   return readFileSync(new URL(`../${name}`, import.meta.url), "utf8");
 }
 
+function between(html, open, close) {
+  const start = html.indexOf(open);
+  assert.notEqual(start, -1, open);
+  const from = start + open.length;
+  const end = html.indexOf(close, from);
+  assert.notEqual(end, -1, close);
+  return html.slice(from, end);
+}
+
 function hasHttpsLink(html, { hostname, pathname, hash = "" }) {
   for (const match of html.matchAll(/href="([^"]+)"/g)) {
     let url;
@@ -71,8 +80,7 @@ describe("privacy policy", () => {
 
   it("sends the extensionless /privacy alias to the canonical policy", () => {
     assert.match(privacy, /rel="canonical" href="https:\/\/cascadiacollections.com\/privacy.html"/);
-    const script = privacy.match(/<script>([\s\S]*?)<\/script>/);
-    assert.ok(script, "privacy page should carry the alias redirect");
+    const script = between(privacy, "<script>", "</script>");
 
     function open(pathname, search = "", hash = "") {
       let replaced = null;
@@ -84,7 +92,7 @@ describe("privacy policy", () => {
           replaced = url;
         },
       };
-      new Function("location", script[1])(location);
+      new Function("location", script)(location);
       return replaced;
     }
 
@@ -98,9 +106,8 @@ describe("privacy policy", () => {
 
 describe("homepage structured data", () => {
   it("parses the JSON-LD graph and keeps Salt Line on its own canonical page", () => {
-    const block = home.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
-    assert.ok(block, "homepage should include JSON-LD");
-    const data = JSON.parse(block[1]);
+    const block = between(home, '<script type="application/ld+json">', "</script>");
+    const data = JSON.parse(block);
     assert.equal(data["@context"], "https://schema.org");
     const types = data["@graph"].map((node) => node["@type"]);
     assert.deepEqual(types, ["WebSite", "Organization", "VideoGame"]);
