@@ -68,6 +68,49 @@ describe("privacy policy", () => {
     const pkg = JSON.parse(read("package.json"));
     assert.equal(pkg.htmlnano.removeComments, false);
   });
+
+  it("sends the extensionless /privacy alias to the canonical policy", () => {
+    assert.match(privacy, /rel="canonical" href="https:\/\/cascadiacollections.com\/privacy.html"/);
+    const script = privacy.match(/<script>([\s\S]*?)<\/script>/);
+    assert.ok(script, "privacy page should carry the alias redirect");
+
+    function open(pathname, search = "", hash = "") {
+      let replaced = null;
+      const location = {
+        pathname,
+        search,
+        hash,
+        replace(url) {
+          replaced = url;
+        },
+      };
+      new Function("location", script[1])(location);
+      return replaced;
+    }
+
+    assert.equal(open("/privacy"), "/privacy.html");
+    assert.equal(open("/privacy/"), "/privacy.html");
+    assert.equal(open("/privacy", "?from=old", "#contact"), "/privacy.html?from=old#contact");
+    assert.equal(open("/privacy.html"), null);
+    assert.equal(open("/privacy.html", "", "#contact"), null);
+  });
+});
+
+describe("homepage structured data", () => {
+  it("parses the JSON-LD graph and keeps Salt Line on its own canonical page", () => {
+    const block = home.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    assert.ok(block, "homepage should include JSON-LD");
+    const data = JSON.parse(block[1]);
+    assert.equal(data["@context"], "https://schema.org");
+    const types = data["@graph"].map((node) => node["@type"]);
+    assert.deepEqual(types, ["WebSite", "Organization", "VideoGame"]);
+    const game = data["@graph"].find((node) => node["@type"] === "VideoGame");
+    assert.equal(game.name, "Salt Line");
+    assert.equal(game.url, "https://cascadiacollections.github.io/saltline/");
+    for (const node of data["@graph"]) {
+      assert.equal(new URL(node.url).protocol, "https:");
+    }
+  });
 });
 
 describe("ShoutKit spelling", () => {

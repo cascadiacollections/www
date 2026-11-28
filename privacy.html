@@ -7,6 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link rel="canonical" href="https://cascadiacollections.com/privacy.html">
+  <script>
+    // GitHub Pages serves this file at /privacy as well as /privacy.html, so a
+    // second document cannot take the alias, and a meta refresh would reload
+    // the canonical URL. Send only the extensionless alias onward.
+    (function () {
+      var path = location.pathname.replace(/\/+$/, "") || "/";
+      if (path === "/privacy") {
+        location.replace("/privacy.html" + location.search + location.hash);
+      }
+    })();
+  </script>
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="icon.png">
   <meta name="theme-color" content="#f4f1e8" media="(prefers-color-scheme: light)">
