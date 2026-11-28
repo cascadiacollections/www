@@ -6,6 +6,15 @@ function read(name) {
   return readFileSync(new URL(`../${name}`, import.meta.url), "utf8");
 }
 
+function between(html, open, close) {
+  const start = html.indexOf(open);
+  assert.notEqual(start, -1, open);
+  const from = start + open.length;
+  const end = html.indexOf(close, from);
+  assert.notEqual(end, -1, close);
+  return html.slice(from, end);
+}
+
 function hasHttpsLink(html, { hostname, pathname, hash = "" }) {
   for (const match of html.matchAll(/href="([^"]+)"/g)) {
     let url;
@@ -67,6 +76,47 @@ describe("privacy policy", () => {
   it("keeps HTML comments so the Cloudflare email_off markers survive the build", () => {
     const pkg = JSON.parse(read("package.json"));
     assert.equal(pkg.htmlnano.removeComments, false);
+  });
+
+  it("sends the extensionless /privacy alias to the canonical policy", () => {
+    assert.match(privacy, /rel="canonical" href="https:\/\/cascadiacollections.com\/privacy.html"/);
+    const script = between(privacy, "<script>", "</script>");
+
+    function open(pathname, search = "", hash = "") {
+      let replaced = null;
+      const location = {
+        pathname,
+        search,
+        hash,
+        replace(url) {
+          replaced = url;
+        },
+      };
+      new Function("location", script)(location);
+      return replaced;
+    }
+
+    assert.equal(open("/privacy"), "/privacy.html");
+    assert.equal(open("/privacy/"), "/privacy.html");
+    assert.equal(open("/privacy", "?from=old", "#contact"), "/privacy.html?from=old#contact");
+    assert.equal(open("/privacy.html"), null);
+    assert.equal(open("/privacy.html", "", "#contact"), null);
+  });
+});
+
+describe("homepage structured data", () => {
+  it("parses the JSON-LD graph and keeps Salt Line on its own canonical page", () => {
+    const block = between(home, '<script type="application/ld+json">', "</script>");
+    const data = JSON.parse(block);
+    assert.equal(data["@context"], "https://schema.org");
+    const types = data["@graph"].map((node) => node["@type"]);
+    assert.deepEqual(types, ["WebSite", "Organization", "VideoGame"]);
+    const game = data["@graph"].find((node) => node["@type"] === "VideoGame");
+    assert.equal(game.name, "Salt Line");
+    assert.equal(game.url, "https://cascadiacollections.github.io/saltline/");
+    for (const node of data["@graph"]) {
+      assert.equal(new URL(node.url).protocol, "https:");
+    }
   });
 });
 
